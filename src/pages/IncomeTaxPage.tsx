@@ -22,6 +22,8 @@ import Section from '../components/Section/Section';
 import {TaxSlab} from '../types/IncomeTaxSlab';
 import './styles.css';
 
+const TAX_REBATE = 1200000;
+
 const IncomeTaxPage = () => {
     const [income, setIncome] = useState<string>('');
     const [useStandardDeduction, setUseStandardDeduction] = useState(true);
@@ -35,6 +37,8 @@ const IncomeTaxPage = () => {
     const [slabData, setSlabData] = useState<TaxSlab[]>([]);
     const [cess, setCess] = useState(0);
     const [incomeTax, setIncomeTax] = useState(0);
+    const [rebate, setRebate] = useState(0);
+    const [marginalRelief, setMarginalRelief] = useState(0);
 
     const setTaxationYear = useCallback((event: SelectChangeEvent) => {
         setYear(event.target.value);
@@ -85,15 +89,32 @@ const IncomeTaxPage = () => {
     const handleCalculate = useCallback(() => {
         const stdDeduction = useStandardDeduction ? 75000 : 0;
         const taxableIncome = (convertPriceToInt(income) || 0) - stdDeduction;
+
         setTaxableIncome(taxableIncome);
         setStandardDeduction(stdDeduction);
         const slabData = calculateTaxSlabs(taxableIncome);
         setSlabData(slabData);
+        setMarginalRelief(0);
         const applicableTax = slabData.reduce((acc, {taxedAmount}) => acc + taxedAmount, 0);
-        const cess = (applicableTax * 4) / 100;
+        let rebate = 0;
+        let marginalRelief = 0;
+        if (taxableIncome <= TAX_REBATE) {
+            setRebate(applicableTax);
+            rebate = applicableTax;
+        } else {
+            setRebate(0);
+            const incomeOverRebate = taxableIncome - TAX_REBATE;
+            if (applicableTax > incomeOverRebate) {
+                marginalRelief = applicableTax - incomeOverRebate;
+                setMarginalRelief(marginalRelief);
+            }
+        }
+
+        const finalTaxBeforeCess = applicableTax - rebate - marginalRelief;
+        const cess = (finalTaxBeforeCess * 4) / 100;
         setCess(cess);
         setApplicableTax(applicableTax);
-        setIncomeTax(applicableTax + cess);
+        setIncomeTax(finalTaxBeforeCess + cess);
     }, [calculateTaxSlabs, income, useStandardDeduction]);
 
     return (
@@ -101,8 +122,8 @@ const IncomeTaxPage = () => {
             <Typography variant="h1" className="pageTitle">
                 Income Tax Calculator
             </Typography>
-            <Typography variant="h2" className="pageSubtitle">
-                According to Budget Feb 2025
+            <Typography variant="h3" className="pageSubtitle">
+                According to Budget February 2025
             </Typography>
             <div className="incometaxColumns">
                 <div className="left-column">
@@ -170,7 +191,7 @@ const IncomeTaxPage = () => {
                             </Typography>
                             <span className="summaryDistribution">
                                 <span>Standard Deducation</span>
-                                <span>-₹{formatPrice(standardDeduction)}</span>
+                                <span className="profit">-₹{formatPrice(standardDeduction)}</span>
                             </span>
 
                             <Typography sx={{mt: 3}} variant="h6">
@@ -228,6 +249,18 @@ const IncomeTaxPage = () => {
                                 <span>Applicable Income Tax</span>
                                 <span>₹{formatPrice(applicableTax)}</span>
                             </span>
+                            {!!rebate && (
+                                <span className="summaryDistribution">
+                                    <span>Rebate upto ₹12 Lakh</span>
+                                    <span className="profit">-₹{formatPrice(rebate)}</span>
+                                </span>
+                            )}
+                            {!!marginalRelief && (
+                                <span className="summaryDistribution">
+                                    <span>Marginal Relief</span>
+                                    <span className="profit">-₹{formatPrice(marginalRelief)}</span>
+                                </span>
+                            )}
                             <span className="summaryDistribution">
                                 <span>Health and Education Cess (4%)</span>
                                 <span>₹{formatPrice(cess)}</span>
