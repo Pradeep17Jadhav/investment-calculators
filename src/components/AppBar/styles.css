@@ -1,0 +1,34 @@
+.appbar-container {
+    background-color: var(--mui-palette-background-default);
+    z-index: 10;
+    color: var(--mui-palette-text-primary);
+    top: 0;
+    position: sticky;
+    border-bottom: var(--magnyfire-border);
+}
+
+.appbar-container .updatedTime {
+    display: flex;
+    padding-right: 8px;
+}
+
+.appbar-container.dark {
+    background-color: #000;
+}
+
+.indices {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+}
+
+.advanced-declined {
+    margin: auto 16px;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+
+.advanced-declined-divider {
+    border-bottom: 1px solid #c9c9c9;
+}
