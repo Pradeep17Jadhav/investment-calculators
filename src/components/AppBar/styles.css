@@ -1,10 +1,8 @@
 .appbar-container {
-    background-color: var(--mui-palette-background-default);
+    background-color: #fff;
     z-index: 10;
-    color: var(--mui-palette-text-primary);
     top: 0;
     position: sticky;
-    border-bottom: var(--magnyfire-border);
 }
 
 .appbar-container .updatedTime {

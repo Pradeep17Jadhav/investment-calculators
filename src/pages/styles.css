@@ -1,6 +1,10 @@
+.pageTitle, .pageSubtitle {
+    text-align: center;
+}
+
 .incometaxContainer {
     width: 1200px;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 .incometaxColumns {
@@ -8,6 +12,7 @@
     flex-direction: row;
     gap: 2rem;
     justify-content: space-between;
+    margin-top: 3rem;
 }
 
 .summaryDistribution {
@@ -17,4 +22,36 @@
 
 .left-column, .right-column {
     width: 100%;
+}
+
+.taxAmoundBanner {
+    width: 100%;
+    height: 96px;
+    background-color: #f1f8ff;
+    border-radius: 6px;
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0px;
+}
+
+.incomeTaxSection {
+    padding: 1.5rem;
+}
+
+.slabsTable {
+    display: flex;
+
+}
+
+.slabsTable .slab {
+    display: flex;
+    flex-grow: 1;
+}
+
+.slabsTable .slabRate, .slabsTable .slabCalculation {
+    width: 25%;
+    text-align: right;
 }
