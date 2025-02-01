@@ -1,16 +1,14 @@
 import React, {useState, useMemo, useCallback} from 'react';
 import classnames from 'classnames';
-import {useNavigate, useLocation} from 'react-router-dom';
-import {IconButton, Menu, MenuItem, Tooltip, Box, Typography, Container, Toolbar} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import {IconButton, Menu, MenuItem, Box, Typography, Container, Toolbar} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import IncomeTaxPage from '../../pages/IncomeTaxPage';
 
 import './styles.css';
 
 const AppBar = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const showDark = location.pathname === '/holdings' ? true : false;
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -35,7 +33,7 @@ const AppBar = () => {
 
     return (
         <>
-            <Container className={classnames('appbar-container', showDark && 'dark')} maxWidth={false}>
+            <Container className={classnames('appbar-container')} maxWidth={false}>
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -89,16 +87,6 @@ const AppBar = () => {
                                 </MenuItem>
                             ))}
                         </Menu>
-                    </Box>
-
-                    <Box sx={{flexGrow: 1, display: {xs: 'none', sm: 'flex'}}}>
-                        {publicPages.map(({label, to, Icon}) => (
-                            <Tooltip key={label} title={label}>
-                                <IconButton size="large" onClick={handleCloseNavMenu(to)} color="default">
-                                    <Icon />
-                                </IconButton>
-                            </Tooltip>
-                        ))}
                     </Box>
                 </Toolbar>
             </Container>

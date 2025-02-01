@@ -7,6 +7,37 @@
   pointer-events: none;
 }
 
+.primary-button {
+  border-radius: 64px !important;
+  padding: 12px 64px !important;
+  background-color: rgb(47, 158, 255) !important;
+  color: #ffffff !important;
+  font-size: 0.975rem !important;
+  font-weight: 700 !important;
+}
+
+h1 {
+  font-size: 3rem !important;
+  margin-bottom: 1rem !important;
+}
+
+h2 {
+  font-size: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+h4 {
+  font-size: 1.5rem !important;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700 !important;
+}
+
+h5, h6 {
+  font-weight: 700 !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -32,6 +63,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
