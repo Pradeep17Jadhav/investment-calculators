@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import {useNavigate} from 'react-router-dom';
 import {IconButton, Menu, MenuItem, Box, Typography, Container, Toolbar} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import IncomeTaxPage from '../../pages/IncomeTaxPage';
+import IncomeTaxPage from '../../pages/IncomeTax/IncomeTaxPage';
 
 import './styles.css';
 

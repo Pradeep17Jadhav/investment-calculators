@@ -7,7 +7,7 @@
     margin: 2rem auto;
 }
 
-.incometaxColumns {
+.incometaxContainer .incometaxColumns {
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -15,16 +15,16 @@
     margin-top: 3rem;
 }
 
-.summaryDistribution {
+.incometaxContainer .summaryDistribution {
     display: flex;
     justify-content: space-between;
 }
 
-.left-column, .right-column {
+.incometaxContainer .left-column, .incometaxContainer .right-column {
     width: 100%;
 }
 
-.taxAmoundBanner {
+.incometaxContainer .taxAmoundBanner {
     width: 100%;
     height: 96px;
     background-color: #f1f8ff;
@@ -41,17 +41,17 @@
     padding: 1.5rem;
 }
 
-.slabsTable {
+.incometaxContainer .slabsTable {
     display: flex;
 
 }
 
-.slabsTable .slab {
+.incometaxContainer .slabsTable .slab {
     display: flex;
     flex-grow: 1;
 }
 
-.slabsTable .slabRate, .slabsTable .slabCalculation {
+.incometaxContainer .slabsTable .slabRate, .incometaxContainer .slabsTable .slabCalculation {
     width: 25%;
     text-align: right;
 }

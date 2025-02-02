@@ -11,6 +11,14 @@ body {
     sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+}
+
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 
 code {

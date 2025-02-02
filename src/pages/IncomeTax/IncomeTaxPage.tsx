@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import {
     Button,
     Checkbox,
@@ -21,8 +21,8 @@ import {
     useTheme,
     useMediaQuery
 } from '@mui/material';
-import Section from '../components/Section/Section';
-import {TaxSlab} from '../types/IncomeTaxSlab';
+import Section from '../../components/Section/Section';
+import {TaxSlab} from '../../types/IncomeTaxSlab';
 import './styles.css';
 
 const TAX_REBATE = 1200000;
@@ -30,6 +30,7 @@ const TAX_REBATE = 1200000;
 const IncomeTaxPage = () => {
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const taxLiabilityRef = useRef<HTMLDivElement>(null);
 
     const [income, setIncome] = useState<string>('');
     const [useStandardDeduction, setUseStandardDeduction] = useState(true);
@@ -121,6 +122,9 @@ const IncomeTaxPage = () => {
         setCess(cess);
         setApplicableTax(applicableTax);
         setIncomeTax(finalTaxBeforeCess + cess);
+        taxLiabilityRef.current?.scrollIntoView({
+            behavior: 'smooth'
+        });
     }, [calculateTaxSlabs, income, useStandardDeduction]);
 
     return (
@@ -275,7 +279,9 @@ const IncomeTaxPage = () => {
                                 <Typography sx={{mt: 3}} variant="h4">
                                     Tax Liability
                                 </Typography>
-                                <div className="taxAmoundBanner">₹{formatPrice(incomeTax)}</div>
+                                <div ref={taxLiabilityRef} className="taxAmoundBanner">
+                                    ₹{formatPrice(incomeTax)}
+                                </div>
                             </div>
                         </Section>
                     </Grid>
